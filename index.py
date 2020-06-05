@@ -1,5 +1,4 @@
-import tkinter
-from tkinter import *
+from tkinter import Tk, Frame, Label, Entry, Button
 
 class vent():
     def __init__(self, ventana):
@@ -17,6 +16,7 @@ class vent():
 
         self.name = Entry(self.frame, width=30)
         self.name.grid(row=1, column=2, columnspan=3)
+        self.name.focus()
 
         self.apellido = Label(self.frame, text="Apellido")
         self.apellido.grid(row=2, column=0,columnspan=2)
