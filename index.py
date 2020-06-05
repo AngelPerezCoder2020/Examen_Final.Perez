@@ -48,14 +48,24 @@ class vent():
         self.F1.grid(row=6, column=0)
 
         def vivido():
-            hoy = date(2020,6,5)
-            nacimiento = date(self.year.get()-self.month.get()-self.day.get())
-            dias = hoy - nacimiento
+            hoy = datetime.datetime.now()
+            a = int(hoy.year)
+            m = int(hoy.month)
+            d = int(hoy.day)
+            hoy2 = date(a,m,d)
 
-            resultado = f"Usted Nació el {nacimiento} y tiene {dias} dias vividos"
+            año = int(self.year.get())
+            mes = int(self.month.get())
+            dia = int(self.day.get())
 
-            self.respuest["text"] = resultado            
+            nacimiento = date(año,mes,dia)
 
+            dias = hoy2 - nacimiento
+
+            dias2 = dias.days
+
+            self.respuest["text"] = f"Usted nació el {nacimiento} y ah vivido {dias2} dias"
+         
         self.F2 = Button(self.frame, text="Función 2", command = vivido)
         self.F2.grid(row=6, column=1)
 
@@ -83,10 +93,32 @@ class vent():
         self.F3 = Button(self.frame, text="Función 3", command=parinpar)
         self.F3.grid(row=6, column=2)
 
-        self.F4 = Button(self.frame, text="Función 4")
+        def vocal(texto):
+            vocales = "aeiouAEIOU"
+
+            return [v for v in texto if v in vocales]
+
+        def v_c():
+            nombre = f"{self.name.get()} {self.ape.get()}"
+            cantT = int(len(nombre))
+            cantv = int(len(vocal(nombre)))
+            cantc = (cantT - cantv)-1
+
+            self.respuest["text"] = f"{nombre} tiene {cantv} vocales y {cantc} consonantes"
+            
+        self.F4 = Button(self.frame, text="Función 4", command= v_c)
         self.F4.grid(row=6, column=3)
 
-        self.F5 = Button(self.frame, text="Función 5")
+        def alrevez():
+            nombre = self.name.get()
+            apellido = self.ape.get()
+
+            nombrea = nombre[::-1]
+            apellidoa = apellido[::-1]
+
+            self.respuest["text"] = f"{nombre} {apellido} al revés {nombrea} {apellidoa}"
+
+        self.F5 = Button(self.frame, text="Función 5", command = alrevez)
         self.F5.grid(row=6, column=4)
 
         self.respuest = Label(self.frame, text="Acá se verá el resultado de las funciones")
