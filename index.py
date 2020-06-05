@@ -1,4 +1,6 @@
 from tkinter import Tk, Frame, Label, Entry, Button
+import datetime
+from datetime import date
 
 class vent():
     def __init__(self, ventana):
@@ -45,10 +47,40 @@ class vent():
         self.F1 = Button(self.frame, text="Función 1")
         self.F1.grid(row=6, column=0)
 
-        self.F2 = Button(self.frame, text="Función 2")
+        def vivido():
+            hoy = date(2020,6,5)
+            nacimiento = date(self.year.get()-self.month.get()-self.day.get())
+            dias = hoy - nacimiento
+
+            resultado = f"Usted Nació el {nacimiento} y tiene {dias} dias vividos"
+
+            self.respuest["text"] = resultado            
+
+        self.F2 = Button(self.frame, text="Función 2", command = vivido)
         self.F2.grid(row=6, column=1)
 
-        self.F3 = Button(self.frame, text="Función 3")
+        def parinpar():
+            nombre = f"{self.name.get()}"
+            apellido = f"{self.ape.get()}"
+
+            conteoNo = len(nombre)
+            conteoAp = len(apellido)
+
+            if conteoNo % 2 == 0:
+                n = "su nombre es par"
+            else:
+                n = "su nombre es impar"
+
+            if conteoAp % 2 == 0:
+                m = "su apellido es par"
+            else:
+                m = "su apellido es impar"
+
+            respuesta = f"{nombre} {apellido} {n} y {m}"
+
+            self.respuest["text"] = respuesta
+
+        self.F3 = Button(self.frame, text="Función 3", command=parinpar)
         self.F3.grid(row=6, column=2)
 
         self.F4 = Button(self.frame, text="Función 4")
