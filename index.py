@@ -44,7 +44,28 @@ class vent():
         self.year = Entry(self.frame, width=30)
         self.year.grid(row=5, column=2, columnspan=3)
 
-        self.F1 = Button(self.frame, text="Función 1")
+        def binarios(num):
+
+            lista = []
+            while num >= 1:
+                lista.insert(0,num%2)
+                num = num // 2
+                binario = "".join(str(i) for i in lista)
+
+            return binario  
+
+        def fecha_binarios():
+            año = int(self.year.get())
+            mes = int(self.month.get())
+            dia = int(self.day.get())
+
+            baño = binarios(año)
+            bimes = binarios(mes)
+            bidia = binarios(dia)
+
+            self.respuest["text"] = f"{año}/{mes}/{dia}  = {baño}/{bimes}/{bidia}"
+
+        self.F1 = Button(self.frame, text="Función 1", command = fecha_binarios)
         self.F1.grid(row=6, column=0)
 
         def vivido():
@@ -116,7 +137,7 @@ class vent():
             nombrea = nombre[::-1]
             apellidoa = apellido[::-1]
 
-            self.respuest["text"] = f"{nombre} {apellido} al revés {nombrea} {apellidoa}"
+            self.respuest["text"] = f"{nombre} {apellido} al revés {apellidoa} {nombrea}"
 
         self.F5 = Button(self.frame, text="Función 5", command = alrevez)
         self.F5.grid(row=6, column=4)
