@@ -55,15 +55,21 @@ class vent():
             return binario  
 
         def fecha_binarios():
-            año = int(self.year.get())
-            mes = int(self.month.get())
-            dia = int(self.day.get())
+            
+            if self.year.get() == "" or self.month.get() == "" or self.day.get() == "":
+                self.respuest["text"] = "**Debe ingresar todos los datos requeridos**"
+            else: 
+                if int(self.month.get()) > 12 or int(self.day.get()) > 31 or int(self.year.get()) > 9999:
+                    self.respuest["text"] = "Los datos ingresados en la fecha no son correctos"
+                else:    
+                    año = int(self.year.get())
+                    mes = int(self.month.get())
+                    dia = int(self.day.get())
+                    baño = binarios(año)
+                    bimes = binarios(mes)
+                    bidia = binarios(dia)
 
-            baño = binarios(año)
-            bimes = binarios(mes)
-            bidia = binarios(dia)
-
-            self.respuest["text"] = f"{año}/{mes}/{dia}  = {baño}/{bimes}/{bidia}"
+                    self.respuest["text"] = f"{año}/{mes}/{dia}  = {baño}/{bimes}/{bidia}"
 
         self.F1 = Button(self.frame, text="Función 1", command = fecha_binarios)
         self.F1.grid(row=6, column=0)
@@ -75,17 +81,25 @@ class vent():
             d = int(hoy.day)
             hoy2 = date(a,m,d)
 
-            año = int(self.year.get())
-            mes = int(self.month.get())
-            dia = int(self.day.get())
+            if self.year.get() == "" or self.month.get() == "" or self.day.get() == "":
+                self.respuest["text"] = "**Debe ingresar todos los datos requeridos**"
+            else:
+                año = int(self.year.get())
+                mes = int(self.month.get())
+                dia = int(self.day.get())
+                
+                if mes > 12 or dia > 31 or año > 9999:
+                     self.respuest["text"] = "Los datos ingresados en la fecha no son correctos"
+                else:
+                    nacimiento = date(año,mes,dia)
+                    if nacimiento > hoy2:
+                        self.respuest["text"] = "La fecha de nacimiento es mayor a la actual, Imposible..."
+                    else:
+                        dias = hoy2 - nacimiento
 
-            nacimiento = date(año,mes,dia)
+                        dias2 = dias.days
 
-            dias = hoy2 - nacimiento
-
-            dias2 = dias.days
-
-            self.respuest["text"] = f"Usted nació el {nacimiento} y ah vivido {dias2} dias"
+                        self.respuest["text"] = f"Usted nació el {nacimiento} y ah vivido {dias2} dias"
          
         self.F2 = Button(self.frame, text="Función 2", command = vivido)
         self.F2.grid(row=6, column=1)
@@ -94,22 +108,25 @@ class vent():
             nombre = f"{self.name.get()}"
             apellido = f"{self.ape.get()}"
 
-            conteoNo = len(nombre)
-            conteoAp = len(apellido)
-
-            if conteoNo % 2 == 0:
-                n = "su nombre es par"
+            if nombre == "" or apellido == "":
+                self.respuest["text"] = "**Debe ingresar todos los datos requeridos**"
             else:
-                n = "su nombre es impar"
+                conteoNo = len(nombre)
+                conteoAp = len(apellido)
 
-            if conteoAp % 2 == 0:
-                m = "su apellido es par"
-            else:
-                m = "su apellido es impar"
+                if conteoNo % 2 == 0:
+                    n = "su nombre es par"
+                else:
+                    n = "su nombre es impar"
 
-            respuesta = f"{nombre} {apellido} {n} y {m}"
+                if conteoAp % 2 == 0:
+                    m = "su apellido es par"
+                else:
+                    m = "su apellido es impar"
 
-            self.respuest["text"] = respuesta
+                respuesta = f"{nombre} {apellido} {n} y {m}"
+
+                self.respuest["text"] = respuesta
 
         self.F3 = Button(self.frame, text="Función 3", command=parinpar)
         self.F3.grid(row=6, column=2)
@@ -120,24 +137,30 @@ class vent():
             return [v for v in texto if v in vocales]
 
         def v_c():
-            nombre = f"{self.name.get()} {self.ape.get()}"
-            cantT = int(len(nombre))
-            cantv = int(len(vocal(nombre)))
-            cantc = (cantT - cantv)-1
+            if self.name.get() == "" or self.ape.get() == "":
+                self.respuest["text"] = "**Debe ingresar todos los datos requeridos**"
+            else:
+                nombre = f"{self.name.get()} {self.ape.get()}"
+                cantT = int(len(nombre))
+                cantv = int(len(vocal(nombre)))
+                cantc = (cantT - cantv)-1
 
-            self.respuest["text"] = f"{nombre} tiene {cantv} vocales y {cantc} consonantes"
+                self.respuest["text"] = f"{nombre} tiene {cantv} vocales y {cantc} consonantes"
             
         self.F4 = Button(self.frame, text="Función 4", command= v_c)
         self.F4.grid(row=6, column=3)
 
         def alrevez():
-            nombre = self.name.get()
-            apellido = self.ape.get()
+            if self.name.get() == "" or self.ape.get() == "":
+                self.respuest["text"] = "**Debe ingresar todos los datos requeridos**"
+            else:
+                nombre = self.name.get()
+                apellido = self.ape.get()
 
-            nombrea = nombre[::-1]
-            apellidoa = apellido[::-1]
+                nombrea = nombre[::-1]
+                apellidoa = apellido[::-1]
 
-            self.respuest["text"] = f"{nombre} {apellido} al revés {apellidoa} {nombrea}"
+                self.respuest["text"] = f"{nombre} {apellido} al revés {apellidoa} {nombrea}"
 
         self.F5 = Button(self.frame, text="Función 5", command = alrevez)
         self.F5.grid(row=6, column=4)
