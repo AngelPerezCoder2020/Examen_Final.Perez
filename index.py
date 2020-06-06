@@ -5,7 +5,7 @@ from datetime import date
 class vent():
     def __init__(self, ventana):
         self.ventana = ventana
-        self.ventana.title("Examen Final")
+        self.ventana.title("Examen Final.PerezDamas")
 
         self.frame = Frame(ventana)
         self.frame.grid(row=0, column=0, padx = 40, ipady = 10)
